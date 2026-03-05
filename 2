@@ -1,0 +1,21 @@
+import random
+
+def quick_select(arr, low, high, k):
+    if low <= high:
+        # случайный pivot
+        random_index = random.randint(low, high)
+        arr[random_index], arr[high] = arr[high], arr[random_index]
+
+        pi = partition(arr, low, high)
+
+        if pi == k:
+            return arr[pi]
+        elif k < pi:
+            return quick_select(arr, low, pi - 1, k)
+        else:
+            return quick_select(arr, pi + 1, high, k)
+
+# пример
+arr2 = [9, 3, 7, 1, 6, 2, 8, 5, 4]
+k = 3
+print(quick_select(arr2, 0, len(arr2) - 1, k))
